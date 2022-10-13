@@ -15,7 +15,7 @@
         class="px-2 py-1 text-lg border border-black border-solid"
         placeholder="Write here..."
       ></textarea>
-      <button class="bg-pink-500 text-white py-2 font-bold text-lg" @click="handleSubmit">SUBMIT</button>
+      <button class="bg-green-500 text-white py-2 font-bold text-lg" @click="handleSubmit">SUBMIT</button>
     </div>
     <div></div>
   </div>

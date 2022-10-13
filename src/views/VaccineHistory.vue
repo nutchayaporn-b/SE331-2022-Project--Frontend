@@ -11,10 +11,10 @@
       />
       <table class="">
         <tr class="text-black">
-          <th class="border-solid border-pink-500 border-4 px-4 py-1">Dose (#)</th>
-          <th class="border-solid border-pink-500 border-4 px-4 py-1">Date Of Vaccination</th>
-          <th class="border-solid border-pink-500 border-4 px-4 py-1">Vaccine ID</th>
-          <th class="border-solid border-pink-500 border-4 px-4 py-1">Name of Vaccination</th>
+          <th class="border-solid border-green-500 border-4 px-4 py-1">Dose (#)</th>
+          <th class="border-solid border-green-500 border-4 px-4 py-1">Date Of Vaccination</th>
+          <th class="border-solid border-green-500 border-4 px-4 py-1">Vaccine ID</th>
+          <th class="border-solid border-green-500 border-4 px-4 py-1">Name of Vaccination</th>
         </tr>
         <VaccineTableBodyInfo
           v-for="vaccine in user.vaccines"

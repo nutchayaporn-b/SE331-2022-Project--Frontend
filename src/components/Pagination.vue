@@ -15,13 +15,13 @@
       <div class="flex-1 flex ml-6">
         <button
           @click="$emit('prevPage')"
-          class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-pink-50"
+          class="cursor-pointer relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-green-50"
         >
           Previous
         </button>
         <button
           @click="$emit('nextPage')"
-          class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-pink-50"
+          class="cursor-pointer ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-green-50"
         >
           Next
         </button>
