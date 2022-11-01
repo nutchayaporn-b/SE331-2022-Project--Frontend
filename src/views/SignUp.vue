@@ -69,7 +69,7 @@ export default {
         return alert("fill in all fields");
       try {
         axiosHelper.post("/register", {
-          username: this.firstName + " " + this.lastName,
+          username: this.email,
           email: this.email,
           phone: this.phone,
           firstname: this.firstName,
