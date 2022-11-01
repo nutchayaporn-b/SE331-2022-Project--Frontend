@@ -3,11 +3,10 @@
     <div class="flex flex-col sm:flex-row gap-4">
       <UserCard
         :name="user.name"
-        :surname="user.surname"
         :age="user.age"
-        :img="user.img"
-        :hometown="user.hometown"
-        :dose="user.vaccines.length"
+        :img="user.image"
+        :hometown="user.location"
+        :dose="user.vaccineList.length"
       />
       <table class="">
         <tr class="text-black">
@@ -17,11 +16,11 @@
           <th class="border-solid border-green-500 border-4 px-4 py-1">Name of Vaccination</th>
         </tr>
         <VaccineTableBodyInfo
-          v-for="vaccine in user.vaccines"
-          :dose="user.vaccines.indexOf(vaccine) + 1"
+          v-for="vaccine in user.vaccineList"
+          :dose="user.vaccineList.indexOf(vaccine) + 1"
           :vaccineDate="vaccine.timestamp"
           :vaccineId="vaccine.id"
-          :vaccineName="vaccine.name"
+          :vaccineName="vaccine.type"
         />
       </table>
     </div>
@@ -36,6 +35,7 @@ import UserCard from "../components/UserCard.vue";
 import VaccineTableBodyInfo from "../components/VaccineTableBodyInfo.vue";
 import RecommendationForm from "../components/RecommendationForm.vue";
 import RecommendationList from "../components/RecommendationList.vue";
+import axiosHelper from "../services/axiosHelper";
 export default {
   components: {
     UserCard,
@@ -44,16 +44,22 @@ export default {
     RecommendationList,
   },
   data() {
-    return {};
+    return {
+      users: [],
+    };
   },
   computed: {
     userId() {
       return this.$route.params.userId;
     },
     user() {
-      return users.find((u) => u.id == this.userId);
+      return this.users.find((u) => u.id == this.userId);
     },
   },
-  methods: {},
+  async created() {
+    const result = await axiosHelper.get("/event").then((res) => res.data);
+    this.users = result;
+    console.log(result);
+  },
 };
 </script>

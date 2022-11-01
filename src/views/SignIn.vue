@@ -39,7 +39,7 @@ export default {
       });
 
       localStorage.setItem("token", result);
-      router.go("/vaccine-history");
+      router.go("/admin");
     },
   },
 };

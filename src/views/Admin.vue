@@ -6,11 +6,10 @@
         <UserCard
           v-if="i <= currentPage * 6 - 1 && i >= (currentPage - 1) * 6"
           :name="user.name"
-          :surname="user.surname"
           :age="user.age"
-          :hometown="user.hometown"
-          :img="user.img"
-          :dose="user.vaccines.length"
+          :hometown="user.location"
+          :img="user.image"
+          :dose="user.vaccineList.length"
           @click="goToVaccineHistory(user)"
         />
       </template>
@@ -18,7 +17,7 @@
     <Pagination
       :start="(currentPage - 1) * 6 + 1"
       :end="currentPage * 6 < users.length ? currentPage * 6 : users.length"
-      :total="users.length"
+      :total="users?.length"
       @next-page="nextPage"
       @prev-page="prevPage"
     />
@@ -26,9 +25,9 @@
 </template>
 <script>
 import UserCard from "../components/UserCard.vue";
-import users from "../mockups/users";
 import router from "../router";
 import Pagination from "../components/Pagination.vue";
+import axiosHelper from "../services/axiosHelper";
 export default {
   components: {
     UserCard,
@@ -36,9 +35,13 @@ export default {
   },
   data() {
     return {
-      users,
+      users: [],
       currentPage: 1,
     };
+  },
+  async created() {
+    const result = await axiosHelper.get("/event").then((res) => res.data);
+    this.users = result;
   },
   methods: {
     goToVaccineHistory(user) {
