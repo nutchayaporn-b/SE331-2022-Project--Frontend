@@ -10,34 +10,32 @@
         </div>
         <div class="-my-2 -mr-2 md:hidden">
           <PopoverButton
-            class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500"
-          >
+            class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
             <span class="sr-only">Open menu</span>
             <Bars3Icon class="h-6 w-6" aria-hidden="true" />
           </PopoverButton>
         </div>
 
-        <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <a href="/sign-in" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
-            >Sign in</a
-          >
-          <a
-            href="/sign-up"
-            class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700"
-            >Sign up</a
-          >
+        <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0" v-if="!login">
+          <a href="/sign-in" class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Sign
+            in</a>
+          <a href="/sign-up"
+            class="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700">Sign
+            up</a>
         </div>
+
+        <div class="hidden items-center justify-end md:flex md:flex-1 lg:w-0" v-if="login">
+          <button :onclick="logout"
+            class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900">Sign
+            out</button>
+        </div>
+
       </div>
     </div>
 
-    <transition
-      enter-active-class="duration-200 ease-out"
-      enter-from-class="opacity-0 scale-95"
-      enter-to-class="opacity-100 scale-100"
-      leave-active-class="duration-100 ease-in"
-      leave-from-class="opacity-100 scale-100"
-      leave-to-class="opacity-0 scale-95"
-    >
+    <transition enter-active-class="duration-200 ease-out" enter-from-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100" leave-active-class="duration-100 ease-in"
+      leave-from-class="opacity-100 scale-100" leave-to-class="opacity-0 scale-95">
       <PopoverPanel focus class="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden">
         <div class="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
           <div class="px-5 pt-5 pb-6">
@@ -47,13 +45,12 @@
               </div>
             </div>
           </div>
-          <div class="space-y-6 py-6 px-5">
+
+          <div class="space-y-6 py-6 px-5" v-if="!login">
             <div>
-              <a
-                href="/sign-up"
-                class="flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700"
-                >Sign up</a
-              >
+              <a href="/sign-up"
+                class="flex w-full items-center justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700">Sign
+                up</a>
               <p class="mt-6 text-center text-base font-medium text-gray-500">
                 Existing patient?
                 {{ " " }}
@@ -61,11 +58,31 @@
               </p>
             </div>
           </div>
+
         </div>
       </PopoverPanel>
     </transition>
   </Popover>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      login: false,
+    }
+  },
+  mounted() {
+    this.login = !!localStorage.getItem('token')
+  },
+  methods: {
+    logout() {
+      localStorage.removeItem('token')
+      window.location.href = '/'
+    }
+  }
+}
+</script>
 
 <script setup>
 import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from "@headlessui/vue";
@@ -84,6 +101,8 @@ import {
   XMarkIcon,
 } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon } from "@heroicons/vue/20/solid";
+import { computed } from "@vue/reactivity";
+import router from "../router";
 
 const solutions = [
   {
