@@ -4,7 +4,7 @@
     <input
       type="text"
       class="border-solid border-black border-b outline-none px-2 py-1 text-lg mt-4 mb-4 md:text-xl md:mt-6 md:mb-4"
-      placeholder="Email or Phone number"
+      placeholder="Email"
     />
     <input
       type="password"
@@ -16,3 +16,15 @@
     </button>
   </form>
 </template>
+
+<script>
+import axiosHelper from "../services/axiosHelper";
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+};
+</script>

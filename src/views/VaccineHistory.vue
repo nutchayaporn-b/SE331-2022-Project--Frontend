@@ -26,14 +26,13 @@
       </table>
     </div>
     <div class="h-100 flex flex-col sm:flex-row mt-4 w-full">
-      <RecommendationForm :userId="user.id" @add="addRecommendation" />
-      <RecommendationList :recommendations="recommendations" :userId="user.id" />
+      <!-- <RecommendationForm :userId="user.id" @add="addRecommendation" /> -->
+      <!-- <RecommendationList :recommendations="recommendations" :userId="user.id" /> -->
     </div>
   </div>
 </template>
 <script>
 import UserCard from "../components/UserCard.vue";
-import users from "../mockups/users";
 import VaccineTableBodyInfo from "../components/VaccineTableBodyInfo.vue";
 import RecommendationForm from "../components/RecommendationForm.vue";
 import RecommendationList from "../components/RecommendationList.vue";
@@ -44,13 +43,8 @@ export default {
     RecommendationForm,
     RecommendationList,
   },
-  created() {
-    this.recommendations = JSON.parse(localStorage.getItem("recommendations"));
-  },
   data() {
-    return {
-      recommendations: [],
-    };
+    return {};
   },
   computed: {
     userId() {
@@ -60,10 +54,6 @@ export default {
       return users.find((u) => u.id == this.userId);
     },
   },
-  methods: {
-    addRecommendation(newRecommendations) {
-      this.recommendations = newRecommendations;
-    },
-  },
+  methods: {},
 };
 </script>
